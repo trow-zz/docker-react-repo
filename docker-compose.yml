@@ -1,0 +1,20 @@
+version: '3'
+services:
+    nombreproyecto: # Debe ser todo minusculas
+        build:
+            context: . #Carpeta del proyecto
+            dockerfile: Dockerfile.dev # Nombre del dockerfile, ya que no es el original sin extensión
+        ports:
+            - "3000:3000"
+        volumes:
+            - /app/node_modules
+            - .:/app # local folder : container folder
+    test:
+        build:
+            context: . #Carpeta del proyecto
+            dockerfile: Dockerfile.dev # Nombre del dockerfile, ya que no es el original sin extensión
+        #No necesita puertos al ser test
+        volumes:
+            - /app/node_modules
+            - .:/app # local folder : container folder
+        command: ["npm","run","test"]
